@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdatbazisTeszt.Database
+namespace Panasz.database
 {
     internal class DatabaseService
     {
