@@ -60,5 +60,26 @@ namespace Panasz.database
 
 
         }
+        public static void InsertUser(string tanarnev, string diaknev, string email, string telefon, string datum, string panasz, string connectionString)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string query = "INSERT INTO panaszkonyv (tanar_neve, diak_neve, email, telefon, datum, panasz) VALUES (@tanarnev, @diaknev, @email, @telefon, @datum, @panasz)";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    
+                    command.Parameters.AddWithValue("@tanarnev", tanarnev);
+                    command.Parameters.AddWithValue("@diaknev", diaknev);
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@telefon", telefon);
+                    command.Parameters.AddWithValue("@datum", datum);
+                    command.Parameters.AddWithValue("@panasz", panasz);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
