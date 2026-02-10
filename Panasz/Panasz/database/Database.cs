@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using Panasz.model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,6 +30,40 @@ namespace Panasz.database
                 Console.WriteLine("Sikertelen kapcsolódás");
                 Console.WriteLine(ex);
             }
+
+        }
+        public static DataTable GetAllDatafromnev(string tableName, string colname, string connectionString, string diaknev)
+        {
+            /* using var connection = new MySqlConnection(connectionString);
+             connection.Open();
+             using var command = new MySqlCommand("select * from " + tableName+ " where "+diaknev+ $" like '%{diaknev}%' ");
+             using var reader = command.ExecuteReader();
+             var dataTable = new DataTable();
+
+             dataTable.Load(reader);
+
+             return dataTable;*/
+            
+
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            string sql = $"SELECT * FROM {tableName} WHERE {colname} LIKE @nev";
+
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@nev", $"%{diaknev}%");
+
+            using var reader = command.ExecuteReader();
+            var dataTable = new DataTable();
+
+            dataTable.Load(reader);
+
+            return dataTable;
+
+
+
+
+
 
         }
 

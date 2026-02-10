@@ -1,6 +1,8 @@
 ﻿using Panasz.database;
 using Panasz.model;
 using System.Data;
+using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class Program
@@ -14,11 +16,86 @@ internal class Program
 
         SelectFromTable("panaszkonyv",connectionString);
         DBCheck(connectionString);
-        Beirszitu();
+        Console.WriteLine("Írni, törölni vagy lekérdezni szeretnél? (i/t/k)");
+        string val = Console.ReadLine();
+
+        if (val == "i")
+        {
+            Beirszitu();
+        }
+        if(val=="k")
+        {
+            Lekerdszitu();
+        }
+        if (val == "t")
+        {
+            Torloszitu();
+        }
+        else
+        {
+            Console.WriteLine("Rendes választ kér a program. lásd-->()");
+        }
+
+    }
+
+    private static void Torloszitu()
+    {
+        Console.WriteLine("Melyik adatsort szeretnéd törölni? (id szám)");
+        int id =Convert.ToInt32( Console.ReadLine());
+        DatabaseService.DeleteById(connectionString,"panaszkonyv",id);
+        Console.WriteLine("A tanár bűnei törölve");
+
+    }
+
+    private static void Lekerdszitu()
+    {
+        Console.WriteLine("Mi alapján szeretnél lekérdezni? (nev/tanarnev/datum)");
+
+        string val = Console.ReadLine();
+
+        if (val == "nev")
+        {
+            Console.WriteLine("Melyik diáknak a panaszadási adatait szeretnéd látni?");
+            string gyerek=Console.ReadLine();
+
+            DataTable dt=  DatabaseService.GetAllDatafromnev("panaszkonyv", "diak_neve", connectionString, gyerek);
+            foreach(DataRow row in dt.Rows)
+            {
+                Console.WriteLine($"{gyerek} adatai:-> ID: {row["id"]} - tanár neve: {row["tanar_neve"]} - diák neve: {row["diak_neve"]} - email: {row["email"]} - telefon: {row["telefon"]} - dátum: {row["datum"]} - panasz: {row["panasz"]}" );
+            }
+        }
+
+        if (val == "tanarnev")
+        {
+            Console.WriteLine("Melyik tanárnak a panaszait szeretnéd látni?");
+            string tanar = Console.ReadLine();
+
+            DataTable dt = DatabaseService.GetAllDatafromnev("panaszkonyv", "tanar_neve", connectionString, tanar);
+            foreach (DataRow row in dt.Rows)
+            {
+                Console.WriteLine($"{tanar} adatai:-> ID: {row["id"]} - tanár neve: {row["tanar_neve"]} - diák neve: {row["diak_neve"]} - email: {row["email"]} - telefon: {row["telefon"]} - dátum: {row["datum"]} - panasz: {row["panasz"]}");
+            }
+
+        }
+
+        if (val == "datum")
+        {
+            Console.WriteLine("Melyik dátum panasz adatait szeretnéd látni?");
+            string datum = Console.ReadLine();
+
+            DataTable dt = DatabaseService.GetAllDatafromnev("panaszkonyv", "datum", connectionString, datum);
+            foreach (DataRow row in dt.Rows)
+            {
+                Console.WriteLine($"{datum} adatai:-> ID: {row["id"]} - tanár neve: {row["tanar_neve"]} - diák neve: {row["diak_neve"]} - email: {row["email"]} - telefon: {row["telefon"]} - dátum: {row["datum"]} - panasz: {row["panasz"]}");
+            }
+
+        }
+        else
+        {
+            Console.WriteLine("A program rendes választ igényel. lásd-->()");
+        }
+
         
-
-
-
     }
 
     private static void Beirszitu()
