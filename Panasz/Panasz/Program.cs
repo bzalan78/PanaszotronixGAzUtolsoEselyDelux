@@ -23,11 +23,11 @@ internal class Program
         {
             Beirszitu();
         }
-        if(val=="k")
+        else if(val=="k")
         {
             Lekerdszitu();
         }
-        if (val == "t")
+        else if (val == "t")
         {
             Torloszitu();
         }
@@ -61,11 +61,18 @@ internal class Program
             DataTable dt=  DatabaseService.GetAllDatafromnev("panaszkonyv", "diak_neve", connectionString, gyerek);
             foreach(DataRow row in dt.Rows)
             {
-                Console.WriteLine($"{gyerek} adatai:-> ID: {row["id"]} - tanár neve: {row["tanar_neve"]} - diák neve: {row["diak_neve"]} - email: {row["email"]} - telefon: {row["telefon"]} - dátum: {row["datum"]} - panasz: {row["panasz"]}" );
+                Console.WriteLine($"{gyerek} adatai:-> ");
+                Console.WriteLine($"    ID: {row["id"]}");
+                Console.WriteLine($"    tanár neve: {row["tanar_neve"]}");
+                Console.WriteLine($"    diák neve: {row["diak_neve"]}");
+                Console.WriteLine($"    email: {row["email"]}");
+                Console.WriteLine($"    telefon: {row["telefon"]}");
+                Console.WriteLine($"    dátum: {row["datum"]}");
+                Console.WriteLine($"    panasz: {row["panasz"]}");
             }
         }
 
-        if (val == "tanarnev")
+        else if (val == "tanarnev")
         {
             Console.WriteLine("Melyik tanárnak a panaszait szeretnéd látni?");
             string tanar = Console.ReadLine();
@@ -73,20 +80,34 @@ internal class Program
             DataTable dt = DatabaseService.GetAllDatafromnev("panaszkonyv", "tanar_neve", connectionString, tanar);
             foreach (DataRow row in dt.Rows)
             {
-                Console.WriteLine($"{tanar} adatai:-> ID: {row["id"]} - tanár neve: {row["tanar_neve"]} - diák neve: {row["diak_neve"]} - email: {row["email"]} - telefon: {row["telefon"]} - dátum: {row["datum"]} - panasz: {row["panasz"]}");
+                Console.WriteLine($"{tanar} adatai:-> ");
+                Console.WriteLine($"    ID: {row["id"]}");
+                Console.WriteLine($"    tanár neve: {row["tanar_neve"]}");
+                Console.WriteLine($"    diák neve: {row["diak_neve"]}");
+                Console.WriteLine($"    email: {row["email"]}");
+                Console.WriteLine($"    telefon: {row["telefon"]}");
+                Console.WriteLine($"    dátum: {row["datum"]}");
+                Console.WriteLine($"    panasz: {row["panasz"]}");
             }
 
         }
 
-        if (val == "datum")
+        else if (val == "datum")
         {
-            Console.WriteLine("Melyik dátum panasz adatait szeretnéd látni?");
+            Console.WriteLine("Melyik dátum panasz adatait szeretnéd látni? (0000-00-00)");
             string datum = Console.ReadLine();
 
             DataTable dt = DatabaseService.GetAllDatafromnev("panaszkonyv", "datum", connectionString, datum);
             foreach (DataRow row in dt.Rows)
             {
-                Console.WriteLine($"{datum} adatai:-> ID: {row["id"]} - tanár neve: {row["tanar_neve"]} - diák neve: {row["diak_neve"]} - email: {row["email"]} - telefon: {row["telefon"]} - dátum: {row["datum"]} - panasz: {row["panasz"]}");
+                Console.WriteLine($"{datum} adatai:-> ");
+                Console.WriteLine($"    ID: {row["id"]}");
+                Console.WriteLine($"    tanár neve: {row["tanar_neve"]}");
+                Console.WriteLine($"    diák neve: {row["diak_neve"]}");
+                Console.WriteLine($"    email: {row["email"]}");
+                Console.WriteLine($"    telefon: {row["telefon"]}");
+                Console.WriteLine($"    dátum: {row["datum"]}");
+                Console.WriteLine($"    panasz: {row["panasz"]}");
             }
 
         }
