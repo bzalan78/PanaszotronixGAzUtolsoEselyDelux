@@ -23,6 +23,9 @@ namespace Panasz.database
                 {
                     connection.Open();
                     Console.WriteLine("Sikeres a csatlakozás!!");
+                    Console.WriteLine();
+                    Console.WriteLine("Üdvözöl a PANASZOTRONIX G: UTOLSÓ ESÉLY DELUX");
+                    Console.WriteLine();
                 }
             }
             catch (Exception ex)
